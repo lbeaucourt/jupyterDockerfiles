@@ -33,6 +33,6 @@ Lite python librairies for ML
 
 - Install docker
 
-- (build docker) docker build -t jupyter-<version> .
+- (build docker) docker build -t NAME .
 
-- (run docker)   docker run -m 8GB -it --rm -p 8888:8888 -v /home/leo/Documents/:/lab jupyter<version>
+- (run docker)   docker run -m 8GB -it --rm -p 8888:8888 -v YOUR_FOLDER:/lab NAME
