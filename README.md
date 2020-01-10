@@ -1,29 +1,29 @@
-## Docker image: python jupyter notebooks for Data Science
+# Docker image: python jupyter notebooks for Data Science
 
 See env.txt for each folders
 
 
-# Jupyter Calliope:
+### Jupyter Calliope:
 
 Energy grid modelisation framework
 
-# Jupyter Python:
+### Jupyter Python:
 
 Python with standard Data & ML librairies
 
-# Jupyter PythonCV:
+### Jupyter PythonCV:
 
 Python for computer vision application (OpendCV) and Deep-Learning packages
 
-# Jupyter PythonDL:
+### Jupyter PythonDL:
 
 Python for Deep-Learning
 
-# Jupyter PythonFull: (Shall be rename)
+### Jupyter PythonFull: (Shall be rename)
 
 Full python for ML and NLP application (include Google query)
 
-# Jupyter PythonLite:
+### Jupyter PythonLite:
 
 Lite python librairies for ML
 
