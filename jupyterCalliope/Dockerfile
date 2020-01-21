@@ -53,7 +53,7 @@ RUN pip install --upgrade jupyter
 RUN pip install -U autovizwidget && jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 # python data core packages
-RUN pip install -U numpy pandas cython joblib xlrd xlsxwriter networkx pyyaml
+RUN pip install -U numpy pandas cython joblib xlrd xlsxwriter networkx pyyaml scipy
 
 # python ml packages
 RUN pip install -U scikit-learn xgboost prophet
@@ -66,6 +66,16 @@ RUN pip install -U boto3 pymongo elasticsearch
 
 # Install visualization tools 
 RUN pip install -U matplotlib seaborn ggplot plotly==3.3 prettyplotlib mplleaflet pandoc
+
+# Install geodata manipulation
+RUN pip install -U pyshp shapely folium geojsoncontour geopandas
+
+# Install GDAL
+#RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
+RUN apt-get -y install gdal-bin libgdal-dev
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
+RUN pip install --global-option=build_ext --global-option="-I/usr/include/gdal/" GDAL==2.0.1
 
 #Setting up working directory 
 RUN mkdir /lab
