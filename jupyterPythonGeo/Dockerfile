@@ -40,11 +40,12 @@ RUN pip install -U matplotlib seaborn ggplot plotly==3.3 prettyplotlib mplleafle
 RUN pip install -U pyshp shapely folium geojsoncontour geopandas osmium
 
 # Install GDAL
-#RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
-RUN apt-get -y install gdal-bin libgdal-dev
-ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
-ENV C_INCLUDE_PATH=/usr/include/gdal
-RUN pip install --global-option=build_ext --global-option="-I/usr/include/gdal/" GDAL==2.0.1
+#RUN apt-add-repository ppa:ubuntugis/ppa && apt-get update
+#RUN apt-get update
+RUN apt-get -y install libgdal1i libgdal1-dev libgdal-dev
+#ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+#ENV C_INCLUDE_PATH=/usr/include/gdal
+RUN pip install pygdal==1.11.3.3
 
 #Setting up working directory 
 RUN mkdir /lab
