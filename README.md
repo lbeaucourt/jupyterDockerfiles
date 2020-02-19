@@ -23,10 +23,13 @@ Python for Deep-Learning
 
 Full python for ML and NLP application (include Google query)
 
+### Jupyter PythonGeo:
+
+Python librairies for geodata manipulation
+
 ### Jupyter PythonLite:
 
 Lite python librairies for ML
-
 
 
 ## How to use:
