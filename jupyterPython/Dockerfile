@@ -1,8 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y locales ap
+RUN apt-get install -y locales
 RUN locale-gen en_US en_US.UTF-8
 
 # Install python packages 
@@ -13,11 +13,12 @@ RUN apt-get update
 RUN apt-get install -y python3-dev gfortran libatlas-base-dev libfreetype6-dev libxft-dev libpng-dev g++ make patch lib32ncurses5-dev
 
 # Install dependencies tools 
-RUN apt-get install -y wget vim
-RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+RUN apt-get install -y curl vim
+RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+#RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
 RUN python3 /tmp/get-pip.py
 RUN apt-get install -y git
-RUN pip install --upgrade pip
+RUN pip install -U pip
 
 # Install jupyter notebook
 RUN pip install -U notebook
@@ -30,10 +31,10 @@ RUN pip install -U autovizwidget && jupyter nbextension enable --py --sys-prefix
 #RUN pip install -U jupyterlab && jupyter serverextension enable --py jupyterlab --sys-prefix 
 
 # python data core packages
-RUN pip install -U numpy pandas cython joblib xlrd xlsxwriter networkx pyyaml
+RUN pip install -U numpy pandas cython joblib xlrd xlsxwriter networkx pyyaml pandas-profiling[notebook]
 
 # python ml packages
-RUN pip install -U scikit-learn xgboost prophet
+RUN pip install -U scikit-learn xgboost
 
 # Install K-prototypes algo
 RUN cd /usr/local/src && git clone https://github.com/nicodv/kmodes.git && cd kmodes && sed -i '20d' setup.py && python3 setup.py install
@@ -42,7 +43,7 @@ RUN cd /usr/local/src && git clone https://github.com/nicodv/kmodes.git && cd km
 RUN pip install -U boto3 pymongo elasticsearch
 
 # Install visualization tools 
-RUN pip install -U matplotlib seaborn ggplot plotly==3.10.0 cufflinks prettyplotlib mplleaflet pandoc
+RUN pip install -U matplotlib seaborn ggplot plotly prettyplotlib mplleaflet pandoc
 
 #Setting up working directory 
 RUN mkdir /lab
