@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -10,15 +10,14 @@ RUN apt-get install -y python3
 
 # Install compile tools 
 RUN apt-get update
-RUN apt-get install -y build-essential cmake libboost-dev libexpat1-dev zlib1g-dev libbz2-dev \
-    python3-dev gfortran libatlas-base-dev libfreetype6-dev libxft-dev libpng-dev g++ make patch lib32ncurses5-dev
+RUN apt-get install -y python3-dev gfortran libatlas-base-dev libfreetype6-dev libxft-dev libpng-dev g++ make patch lib32ncurses5-dev
 
 # Install dependencies tools 
-RUN apt-get install -y wget vim
-RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+RUN apt-get install -y curl vim
+RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 RUN python3 /tmp/get-pip.py
 RUN apt-get install -y git
-RUN pip install --upgrade pip
+RUN pip install -U pip
 
 # Install jupyter notebook
 RUN pip install -U notebook
@@ -31,10 +30,10 @@ RUN pip install -U autovizwidget && jupyter nbextension enable --py --sys-prefix
 #RUN  pip install -U jupyterlab && jupyter serverextension enable --py jupyterlab --sys-prefix 
 
 # python data core packages 
-RUN pip install -U numpy pandas scipy
+RUN pip install -U numpy pandas scipy pandas-profiling[notebook]
 
 # Install visualization tools 
-RUN pip install -U matplotlib seaborn ggplot plotly==3.3 prettyplotlib mplleaflet pandoc
+RUN pip install -U matplotlib seaborn ggplot plotly prettyplotlib mplleaflet pandoc
 
 # Install geodata manipulation
 RUN pip install -U pyshp shapely folium geojsoncontour geopandas osmium
@@ -42,10 +41,11 @@ RUN pip install -U pyshp shapely folium geojsoncontour geopandas osmium
 # Install GDAL
 #RUN apt-add-repository ppa:ubuntugis/ppa && apt-get update
 #RUN apt-get update
-RUN apt-get -y install libgdal1i libgdal1-dev libgdal-dev
+#RUN apt-get -y install libgdal1i libgdal1-dev libgdal-dev
+RUN apt-get -y install libgdal-dev
 #ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 #ENV C_INCLUDE_PATH=/usr/include/gdal
-RUN pip install pygdal==1.11.3.3
+RUN pip install pygdal=="`gdal-config --version`.*"
 
 #Setting up working directory 
 RUN mkdir /lab
