@@ -7,6 +7,12 @@ See env.txt for each folders
 
 Energy grid modelisation framework
 
+### Jupyter Python CPLEX:
+
+Python with Networks and DOCPLEX library
+(need to add CPLEX bin file in folder)
+
+
 ### Jupyter Python:
 
 Python with standard Data & ML librairies
